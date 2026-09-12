@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Pre-Visit Consultation Form | IKINUKI - 雅 -</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&family=Noto+Serif+JP:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--charcoal:#2A241E;--cream:#F7F4EF;--sand:#B8A98F;--gold:#9C8654;--line:#E2DBCF;--err:#A8442C}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--cream);color:var(--charcoal);
+  font-family:'Cormorant Garamond','Noto Serif JP',serif;font-size:17px;line-height:1.8;
+  -webkit-font-smoothing:antialiased}
+body.ja{font-family:'Noto Serif JP',serif;font-size:15.5px}
+.wrap{max-width:640px;margin:0 auto;padding:0 22px}
+
+header{padding:44px 0 26px;text-align:center;border-bottom:1px solid var(--line)}
+.brand{font-size:13px;letter-spacing:.42em;color:var(--gold);margin:0 0 16px}
+h1{font-size:27px;font-weight:400;letter-spacing:.04em;margin:0 0 8px;line-height:1.45}
+.lead{font-size:14.5px;color:#6C6358;margin:0 auto;max-width:46ch;line-height:1.9}
+.lang{margin-top:20px}
+.lang button{background:none;border:none;font:inherit;font-size:12px;letter-spacing:.22em;
+  color:var(--sand);cursor:pointer;padding:5px 12px}
+.lang button.on{color:var(--charcoal);border-bottom:1px solid var(--gold)}
+
+.prog{position:sticky;top:0;z-index:10;height:2px;background:var(--line)}
+.prog i{display:block;height:100%;width:0;background:var(--gold);transition:width .3s}
+
+section{padding:34px 0 6px;border-bottom:1px solid var(--line)}
+.sec-no{font-size:11px;letter-spacing:.28em;color:var(--gold);margin:0 0 4px}
+h2{font-size:19px;font-weight:400;letter-spacing:.04em;margin:0 0 22px}
+
+.q{margin:0 0 30px}
+.q>label.qt,.qt{display:block;font-size:15.5px;margin:0 0 4px;line-height:1.7}
+body.ja .qt{font-size:15px}
+.hint{font-size:13px;color:#7C7469;margin:0 0 10px;line-height:1.75}
+.req{color:var(--gold);font-size:11px;letter-spacing:.1em;margin-left:7px;vertical-align:1px}
+.opt{color:var(--sand);font-size:11px;letter-spacing:.1em;margin-left:7px;vertical-align:1px}
+
+input[type=text],input[type=date],input[type=time],select,textarea{
+  width:100%;padding:11px 13px;border:1px solid var(--line);background:#fff;border-radius:2px;
+  font:inherit;font-size:15px;color:var(--charcoal)}
+body.ja input,body.ja select,body.ja textarea{font-size:14.5px}
+textarea{min-height:78px;resize:vertical}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--gold)}
+.row2{display:flex;gap:12px}.row2>div{flex:1;min-width:0}
+
+.opts{display:flex;flex-direction:column;gap:1px}
+.opts label{display:flex;align-items:flex-start;gap:11px;padding:10px 13px;background:#fff;
+  border:1px solid var(--line);cursor:pointer;font-size:14.5px;line-height:1.65}
+.opts label:hover{border-color:var(--sand)}
+.opts label.sel{border-color:var(--gold);background:#FCFAF6}
+.opts input{margin:5px 0 0;accent-color:var(--gold);flex:none;width:15px;height:15px}
+.opts span{flex:1}
+
+.sub{margin-top:12px;padding-left:14px;border-left:2px solid var(--gold)}
+.notice{background:#FCFAF6;border:1px solid var(--line);padding:14px 16px;margin-top:12px;
+  font-size:13.5px;line-height:1.85;color:#5E564B}
+.file{display:block;margin-top:10px;font-size:14px}
+.file input{font-size:13px}
+.thumb{margin-top:10px;max-width:170px;border:1px solid var(--line)}
+
+.consent label{align-items:flex-start}
+.err{color:var(--err);font-size:13px;margin-top:6px;display:none}
+.q.bad input[type=text],.q.bad select,.q.bad textarea,.q.bad .opts label{border-color:var(--err)}
+.q.bad .err{display:block}
+
+.actions{padding:34px 0 70px;text-align:center}
+button.send{background:var(--charcoal);color:var(--cream);border:none;font:inherit;font-size:13px;
+  letter-spacing:.26em;padding:17px 54px;cursor:pointer;border-radius:2px}
+button.send:disabled{opacity:.45;cursor:default}
+.sending{font-size:13px;color:#7C7469;margin-top:14px;min-height:20px}
+
+#done{display:none;padding:80px 0;text-align:center}
+#done h2{font-size:23px;margin-bottom:18px}
+#done p{font-size:14.5px;color:#6C6358;line-height:2;max-width:44ch;margin:0 auto 14px}
+[hidden]{display:none!important}
+@media(max-width:520px){h1{font-size:23px}.wrap{padding:0 17px}.row2{flex-direction:column;gap:10px}}
+</style>
+</head>
+<body>
+<div class="prog"><i id="prog"></i></div>
+
+<div class="wrap">
+
+<header>
+  <p class="brand">IKINUKI &nbsp;/&nbsp; ASAKUSA</p>
+  <h1 data-en="Pre-Visit Consultation Form" data-ja="ご来店前カウンセリングフォーム">Pre-Visit Consultation Form</h1>
+  <p class="lead" data-en="To help us provide a safe and comfortable treatment, each guest completes this form individually. If you are visiting as a pair, please submit one response per guest. This takes about 3 minutes."
+     data-ja="安全で快適な施術をご提供するため、ご来店になる方お一人ずつご回答ください。ペアでご予約の場合も、髪・頭皮・体調・アレルギーに関する項目は、それぞれご本人が回答してください。所要時間は約3分です。">To help us provide a safe and comfortable treatment, each guest completes this form individually. If you are visiting as a pair, please submit one response per guest. This takes about 3 minutes.</p>
+  <div class="lang">
+    <button id="btn-en" class="on" onclick="setLang('en')">EN</button>
+    <button id="btn-ja" onclick="setLang('ja')">日本語</button>
+  </div>
+</header>
+
+<form id="f" novalidate>
+
+<!-- 1 -->
+<section>
+  <p class="sec-no">01</p>
+  <h2 data-en="Booking Information" data-ja="ご予約情報">Booking Information</h2>
+
+  <div class="q" data-q>
+    <label class="qt" data-en="Booking name<i class='req'>REQUIRED</i>" data-ja="予約者名<i class='req'>必須</i>">Booking name<i class="req">REQUIRED</i></label>
+    <input type="text" name="q1_booking_name" data-req>
+    <p class="err" data-en="Please fill this in." data-ja="ご入力ください。">Please fill this in.</p>
+  </div>
+
+  <div class="q" data-q>
+    <label class="qt" data-en="Guest name<i class='req'>REQUIRED</i>" data-ja="ご来店者のお名前<i class='req'>必須</i>">Guest name<i class="req">REQUIRED</i></label>
+    <p class="hint" data-en="Please enter the name you would like us to use." data-ja="お呼びするお名前で構いません。">Please enter the name you would like us to use.</p>
+    <input type="text" name="q2_guest_name" data-req>
+    <p class="err" data-en="Please fill this in." data-ja="ご入力ください。">Please fill this in.</p>
+  </div>
+
+  <div class="q" data-q>
+    <label class="qt" data-en="Appointment date and start time<i class='req'>REQUIRED</i>" data-ja="ご予約日時<i class='req'>必須</i>">Appointment date and start time<i class="req">REQUIRED</i></label>
+    <div class="row2">
+      <div><input type="date" name="q3_date" data-req></div>
+      <div><input type="time" name="q3_time" data-req></div>
+    </div>
+    <p class="err" data-en="Please select a date and time." data-ja="日付と時間をお選びください。">Please select a date and time.</p>
+  </div>
+
+  <div class="q" data-q>
+    <label class="qt" data-en="Number of guests in your booking<i class='req'>REQUIRED</i>" data-ja="ご予約人数<i class='req'>必須</i>">Number of guests in your booking<i class="req">REQUIRED</i></label>
+    <div class="opts" data-single data-req>
+      <label><input type="radio" name="q4_guests" value="1"><span data-en="One guest" data-ja="1名">One guest</span></label>
+      <label><input type="radio" name="q4_guests" value="2"><span data-en="Two guests" data-ja="2名">Two guests</span></label>
+    </div>
+    <p class="err" data-en="Please choose one." data-ja="お選びください。">Please choose one.</p>
+  </div>
+
+  <div class="q" data-q>
+    <label class="qt" data-en="Language for your visit<i class='req'>REQUIRED</i>" data-ja="当日のご案内言語<i class='req'>必須</i>">Language for your visit<i class="req">REQUIRED</i></label>
+    <div class="opts" data-single data-req>
+      <label><input type="radio" name="q5_language" value="Japanese"><span data-en="Japanese" data-ja="日本語">Japanese</span></label>
+      <label><input type="radio" name="q5_language" value="English"><span data-en="English" data-ja="English">English</span></label>
+    </div>
+    <p class="err" data-en="Please choose one." data-ja="お選びください。">Please choose one.</p>
+  </div>
+</section>
+
+<!-- 2 -->
+<section>
+  <p class="sec-no">02</p>
+  <h2 data-en="Hair and Scalp" data-ja="髪・頭皮について">Hair and Scalp</h2>
+
+  <div class="q" data-q>
+    <label class="qt" data-en="What is your hair type?<i class='req'>REQUIRED</i>" data-ja="髪質を教えてください<i class='req'>必須</i>">What is your hair type?<i class="req">REQUIRED</i></label>
+    <div class="opts" data-single data-req>
+      <label><input type="radio" name="q6_hair_type" value="Straight"><span data-en="Straight" data-ja="ストレート">Straight</span></label>
+      <label><input type="radio" name="q6_hair_type" value="Wavy"><span data-en="Wavy" data-ja="ウェーブ">Wavy</span></label>
+      <label><input type="radio" name="q6_hair_type" value="Curly"><span data-en="Curly" data-ja="カール">Curly</span></label>
+      <label><input type="radio" name="q6_hair_type" value="Coily"><span data-en="Coily" data-ja="コイリー">Coily</span></label>
+      <label><input type="radio" name="q6_hair_type" value="Not sure"><span data-en="Not sure" data-ja="わからない">Not sure</span></label>
+    </div>
+    <p class="err" data-en="Please choose one." data-ja="お選びください。">Please choose one.</p>
+  </div>
+
+  <div class="q" data-q>
+    <label class="qt" data-en="What is your hair length?<i class='req'>REQUIRED</i>" data-ja="髪の長さを教えてください<i class='req'>必須</i>">What is your hair length?<i class="req">REQUIRED</i></label>
+    <div class="opts" data-single data-req>
+      <label><input type="radio" name="q7_hair_length" value="Short"><span data-en="Short" data-ja="ショート">Short</span></label>
+      <label><input type="radio" name="q7_hair_length" value="Medium"><span data-en="Medium" data-ja="ミディアム">Medium</span></label>
+      <label><input type="radio" name="q7_hair_length" value="Long"><span data-en="Long" data-ja="ロング">Long</span></label>
+      <label><input type="radio" name="q7_hair_length" value="Extra-long"><span data-en="Extra-long" data-ja="スーパーロング">Extra-long</span></label>
+    </div>
+    <p class="err" data-en="Please choose one." data-ja="お選びください。">Please choose one.</p>
+  </div>
+
+  <div class="q" data-q>
+    <label class="qt" data-en="Please select anything that applies to your hair<i class='req'>REQUIRED</i>" data-ja="現在の髪の状態について、当てはまるものをお選びください<i class='req'>必須</i>">Please select anything that applies to your hair<i class="req">REQUIRED</i></label>
+    <div class="opts" data-multi data-req data-none="None">
+      <label><input type="checkbox" name="q8_hair_state" value="None" data-none><span data-en="None" data-ja="特になし">None</span></label>
+      <label><input type="checkbox" name="q8_hair_state" value="Color-treated"><span data-en="Color-treated" data-ja="カラーをしている">Color-treated</span></label>
+      <label><input type="checkbox" name="q8_hair_state" value="Bleached"><span data-en="Bleached" data-ja="ブリーチをしている">Bleached</span></label>
+      <label><input type="checkbox" name="q8_hair_state" value="Permed"><span data-en="Permed" data-ja="パーマをしている">Permed</span></label>
+      <label><input type="checkbox" name="q8_hair_state" value="Chemically straightened"><span data-en="Chemically straightened" data-ja="縮毛矯正・ストレート施術をしている">Chemically straightened</span></label>
+      <label><input type="checkbox" name="q8_hair_state" value="Dry or damaged"><span data-en="Dry or damaged" data-ja="髪の乾燥やダメージが気になる">Dry or damaged</span></label>
+      <label><input type="checkbox" name="q8_hair_state" value="Other" data-other><span data-en="Other" data-ja="その他">Other</span></label>
+    </div>
+    <div class="sub" data-showif="q8_hair_state:Other" hidden>
+      <textarea name="q8_other" data-en-ph="Please tell us more" data-ja-ph="内容をご記入ください"></textarea>
+    </div>
+    <p class="err" data-en="Please choose at least one." data-ja="1つ以上お選びください。">Please choose at least one.</p>
+  </div>
+
+  <div class="q" data-q>
+    <label class="qt" data-en="Do you currently have extensions or a protective hairstyle?<i class='req'>REQUIRED</i>" data-ja="現在、エクステや特殊なヘアスタイルをされていますか？<i class='req'>必須</i>">Do you currently have extensions or a protective hairstyle?<i class="req">REQUIRED</i></label>
+    <div class="opts" data-single data-req>
+      <label><input type="radio" name="q9_extensions" value="No"><span data-en="No" data-ja="いいえ">No</span></label>
+      <label><input type="radio" name="q9_extensions" value="Removable extensions or hairpiece"><span data-en="Removable extensions or hairpiece" data-ja="取り外し可能なエクステ・ヘアピース">Removable extensions or hairpiece</span></label>
+      <label><input type="radio" name="q9_extensions" value="Tape-in extensions"><span data-en="Tape-in extensions" data-ja="テープ式エクステ">Tape-in extensions</span></label>
+      <label><input type="radio" name="q9_extensions" value="Braided or sew-in extensions"><span data-en="Braided or sew-in extensions" data-ja="編み込み・縫い付け式エクステ">Braided or sew-in extensions</span></label>
+      <label><input type="radio" name="q9_extensions" value="Braids or cornrows"><span data-en="Braids or cornrows" data-ja="ブレイズ・コーンロウ">Braids or cornrows</span></label>
+      <label><input type="radio" name="q9_extensions" value="Dreadlocks or locs"><span data-en="Dreadlocks or locs" data-ja="ドレッド・ロックス">Dreadlocks or locs</span></label>
+      <label><input type="radio" name="q9_extensions" value="Wig"><span data-en="Wig" data-ja="ウィッグ">Wig</span></label>
+      <label><input type="radio" name="q9_extensions" value="Hair transplant or hair enhancement"><span data-en="Hair transplant or hair enhancement" data-ja="植毛・増毛">Hair transplant or hair enhancement</span></label>
+      <label><input type="radio" name="q9_extensions" value="Other"><span data-en="Other" data-ja="その他">Other</span></label>
+      <label><input type="radio" name="q9_extensions" value="Not sure"><span data-en="Not sure" data-ja="わからない">Not sure</span></label>
+    </div>
+    <div class="sub" data-shownotif="q9_extensions:No" hidden>
+      <p class="notice" data-en="IKINUKI treatments require access to the scalp and include washing, massage and herbal oil. Depending on the hairstyle and attachment method, we may need to adjust or decline the treatment to prevent loosening, tangling or incomplete drying. Our team may contact you before your appointment."
+         data-ja="IKINUKIのヘッドスパでは、頭皮全体への施術、洗浄、オイルの使用を行います。ヘアスタイルや装着方法によっては、装着部分の緩み、髪の絡まり、乾燥不足などを防ぐため、施術内容の変更または施術をお断りする場合があります。内容を確認後、必要に応じて店舗からご連絡します。">IKINUKI treatments require access to the scalp and include washing, massage and herbal oil. Depending on the hairstyle and attachment method, we may need to adjust or decline the treatment to prevent loosening, tangling or incomplete drying. Our team may contact you before your appointment.</p>
+      <label class="file">
+        <span data-en="Please upload a photo showing your current hairstyle." data-ja="現在の髪型がわかる写真を添付してください。">Please upload a photo showing your current hairstyle.</span><br>
+        <input type="file" id="photo" accept="image/*">
+      </label>
+      <img id="thumb" class="thumb" hidden alt="">
+      <p class="hint" id="photoNote"></p>
+    </div>
+    <p class="err" data-en="Please choose one." data-ja="お選びください。">Please choose one.</p>
+  </div>
+
+  <div class="q" data-q>
+    <label class="qt" data-en="Please select anything that applies to your scalp<i class='req'>REQUIRED</i>" data-ja="現在の頭皮の状態について、当てはまるものをお選びください<i class='req'>必須</i>">Please select anything that applies to your scalp<i class="req">REQUIRED</i></label>
+    <div class="opts" data-multi data-req data-none="No concerns">
+      <label><input type="checkbox" name="q10_scalp" value="No concerns" data-none><span data-en="No concerns" data-ja="特に気になることはない">No concerns</span></label>
+      <label><input type="checkbox" name="q10_scalp" value="Dryness"><span data-en="Dryness" data-ja="乾燥">Dryness</span></label>
+      <label><input type="checkbox" name="q10_scalp" value="Itching"><span data-en="Itching" data-ja="かゆみ">Itching</span></label>
+      <label><input type="checkbox" name="q10_scalp" value="Redness or irritation"><span data-en="Redness or irritation" data-ja="赤み・刺激">Redness or irritation</span></label>
+      <label><input type="checkbox" name="q10_scalp" value="Flaking or dandruff"><span data-en="Flaking or dandruff" data-ja="フケ">Flaking or dandruff</span></label>
+      <label><input type="checkbox" name="q10_scalp" value="Cuts, swelling or rash"><span data-en="Cuts, swelling or rash" data-ja="傷・腫れ・湿疹">Cuts, swelling or rash</span></label>
+      <label><input type="checkbox" name="q10_scalp" value="Sunburn"><span data-en="Sunburn" data-ja="日焼け">Sunburn</span></label>
+      <label><input type="checkbox" name="q10_scalp" value="Other" data-other><span data-en="Other" data-ja="その他">Other</span></label>
+    </div>
+    <div class="sub" data-showif="q10_scalp:Other" hidden>
+      <textarea name="q10_other" data-en-ph="Please tell us more" data-ja-ph="内容をご記入ください"></textarea>
+    </div>
+    <p class="err" data-en="Please choose at least one." data-ja="1つ以上お選びください。">Please choose at least one.</p>
+  </div>
+</section>
+
+<!-- 3 -->
+<section>
+  <p class="sec-no">03</p>
+  <h2 data-en="Health and Safety" data-ja="体調・安全確認">Health and Safety</h2>
+
+  <div class="q" data-q>
+    <label class="qt" data-en="Is there anything we should consider before your treatment?<i class='req'>REQUIRED</i>" data-ja="現在、施術にあたり配慮が必要な状態はありますか？<i class='req'>必須</i>">Is there anything we should consider before your treatment?<i class="req">REQUIRED</i></label>
+    <div class="opts" data-multi data-req data-none="No">
+      <label><input type="checkbox" name="q11_health" value="No" data-none><span data-en="No" data-ja="いいえ">No</span></label>
+      <label><input type="checkbox" name="q11_health" value="Pregnant or possibly pregnant"><span data-en="Pregnant or possibly pregnant" data-ja="妊娠中、または妊娠の可能性がある">Pregnant or possibly pregnant</span></label>
+      <label><input type="checkbox" name="q11_health" value="Injury or pain in head, neck or shoulders"><span data-en="Injury or significant pain in the head, neck or shoulders" data-ja="首・肩・頭部にけがや強い痛みがある">Injury or significant pain in the head, neck or shoulders</span></label>
+      <label><input type="checkbox" name="q11_health" value="Cuts, swelling, rash or severe scalp irritation"><span data-en="Cuts, swelling, rash or severe scalp irritation" data-ja="頭皮に傷・腫れ・湿疹・強い炎症がある">Cuts, swelling, rash or severe scalp irritation</span></label>
+      <label><input type="checkbox" name="q11_health" value="Receiving treatment for a skin or scalp condition"><span data-en="Receiving treatment for a skin or scalp condition" data-ja="現在、皮膚や頭皮の治療中である">Receiving treatment for a skin or scalp condition</span></label>
+      <label><input type="checkbox" name="q11_health" value="Recent surgery or major medical treatment"><span data-en="Recent surgery or major medical treatment" data-ja="最近、手術または大きな治療を受けた">Recent surgery or major medical treatment</span></label>
+      <label><input type="checkbox" name="q11_health" value="Advised to avoid massage or heat treatments"><span data-en="Advised to avoid massage or heat treatments" data-ja="医師からマッサージや温浴を控えるよう言われている">Advised to avoid massage or heat treatments</span></label>
+      <label><input type="checkbox" name="q11_health" value="Other"><span data-en="Other information we should know" data-ja="その他、事前に伝えたいことがある">Other information we should know</span></label>
+    </div>
+    <div class="sub" data-shownotnone="q11_health" hidden>
+      <p class="hint" data-en="Please tell us anything we need to know to adjust your treatment. You do not need to provide a detailed diagnosis."
+         data-ja="施術に関して配慮が必要なことを、差し支えない範囲でご記入ください。病名などの詳しい説明は必要ありません。">Please tell us anything we need to know to adjust your treatment. You do not need to provide a detailed diagnosis.</p>
+      <textarea name="q11_detail"></textarea>
+    </div>
+    <p class="err" data-en="Please choose at least one." data-ja="1つ以上お選びください。">Please choose at least one.</p>
+  </div>
+
+  <div class="q" data-q>
+    <label class="qt" data-en="Have you ever had an allergy or skin reaction to cosmetics or other products?<i class='req'>REQUIRED</i>" data-ja="アレルギーや、化粧品などで肌がかぶれたことはありますか？<i class='req'>必須</i>">Have you ever had an allergy or skin reaction to cosmetics or other products?<i class="req">REQUIRED</i></label>
+    <div class="opts" data-multi data-req data-none="No">
+      <label><input type="checkbox" name="q12_allergy" value="No" data-none><span data-en="No" data-ja="いいえ">No</span></label>
+      <label><input type="checkbox" name="q12_allergy" value="Cosmetics or skincare products"><span data-en="Cosmetics or skincare products" data-ja="化粧品・スキンケア製品">Cosmetics or skincare products</span></label>
+      <label><input type="checkbox" name="q12_allergy" value="Shampoo or haircare products"><span data-en="Shampoo or haircare products" data-ja="シャンプー・ヘアケア製品">Shampoo or haircare products</span></label>
+      <label><input type="checkbox" name="q12_allergy" value="Fragrances or essential oils"><span data-en="Fragrances or essential oils" data-ja="香料・精油">Fragrances or essential oils</span></label>
+      <label><input type="checkbox" name="q12_allergy" value="Herbal or botanical ingredients"><span data-en="Herbal or botanical ingredients" data-ja="ハーブ・植物由来成分">Herbal or botanical ingredients</span></label>
+      <label><input type="checkbox" name="q12_allergy" value="Pollen"><span data-en="Pollen" data-ja="花粉">Pollen</span></label>
+      <label><input type="checkbox" name="q12_allergy" value="Nuts"><span data-en="Nuts" data-ja="ナッツ類">Nuts</span></label>
+      <label><input type="checkbox" name="q12_allergy" value="Metals"><span data-en="Metals" data-ja="金属">Metals</span></label>
+      <label><input type="checkbox" name="q12_allergy" value="Other"><span data-en="Other" data-ja="その他">Other</span></label>
+      <label><input type="checkbox" name="q12_allergy" value="Not sure"><span data-en="Not sure" data-ja="わからない">Not sure</span></label>
+    </div>
+    <div class="sub" data-shownotnone="q12_allergy" hidden>
+      <p class="hint" data-en="If known, please tell us which product or ingredient caused the reaction and what happened."
+         data-ja="わかる範囲で、反応した製品・成分・症状をご記入ください。">If known, please tell us which product or ingredient caused the reaction and what happened.</p>
+      <textarea name="q12_detail"></textarea>
+    </div>
+    <p class="err" data-en="Please choose at least one." data-ja="1つ以上お選びください。">Please choose at least one.</p>
+  </div>
+
+  <div class="q" data-q>
+    <label class="qt" data-en="Are there any ingredients you would like us to avoid?<i class='req'>REQUIRED</i>" data-ja="使用を避けたい成分はありますか？<i class='req'>必須</i>">Are there any ingredients you would like us to avoid?<i class="req">REQUIRED</i></label>
+    <p class="hint" data-en="Please tell us if there are any ingredients you would like us to avoid because of allergies, sensitivities or personal beliefs."
+       data-ja="アレルギー、体質、信条などの理由で避けたい成分があればご記入ください。">Please tell us if there are any ingredients you would like us to avoid because of allergies, sensitivities or personal beliefs.</p>
+    <div class="opts" data-single data-req>
+      <label><input type="radio" name="q13_avoid" value="None"><span data-en="None" data-ja="特になし">None</span></label>
+      <label><input type="radio" name="q13_avoid" value="Yes"><span data-en="Yes" data-ja="あり">Yes</span></label>
+      <label><input type="radio" name="q13_avoid" value="Not sure"><span data-en="Not sure" data-ja="わからない">Not sure</span></label>
+    </div>
+    <div class="sub" data-showif="q13_avoid:Yes" hidden>
+      <textarea name="q13_detail" data-en-ph="Please list the ingredients you would like us to avoid." data-ja-ph="避けたい成分をご記入ください。"></textarea>
+    </div>
+    <p class="err" data-en="Please choose one." data-ja="お選びください。">Please choose one.</p>
+  </div>
+
+  <div class="q" data-q>
+    <label class="qt" data-en="Are there any areas you would prefer us not to touch?<i class='req'>REQUIRED</i>" data-ja="特に触れてほしくない場所はありますか？<i class='req'>必須</i>">Are there any areas you would prefer us not to touch?<i class="req">REQUIRED</i></label>
+    <div class="opts" data-multi data-req data-none="None">
+      <label><input type="checkbox" name="q14_avoid_areas" value="None" data-none><span data-en="None" data-ja="特になし">None</span></label>
+      <label><input type="checkbox" name="q14_avoid_areas" value="Face"><span data-en="Face" data-ja="顔">Face</span></label>
+      <label><input type="checkbox" name="q14_avoid_areas" value="A specific area of the scalp"><span data-en="A specific area of the scalp" data-ja="頭皮の一部">A specific area of the scalp</span></label>
+      <label><input type="checkbox" name="q14_avoid_areas" value="Neck"><span data-en="Neck" data-ja="首">Neck</span></label>
+      <label><input type="checkbox" name="q14_avoid_areas" value="Shoulders or décolletage"><span data-en="Shoulders or décolletage" data-ja="肩・デコルテ">Shoulders or décolletage</span></label>
+      <label><input type="checkbox" name="q14_avoid_areas" value="Arms or hands"><span data-en="Arms or hands" data-ja="腕・手">Arms or hands</span></label>
+      <label><input type="checkbox" name="q14_avoid_areas" value="Feet"><span data-en="Feet" data-ja="足">Feet</span></label>
+      <label><input type="checkbox" name="q14_avoid_areas" value="Other"><span data-en="Other" data-ja="その他">Other</span></label>
+    </div>
+    <div class="sub" data-shownotnone="q14_avoid_areas" hidden>
+      <p class="hint" data-en="Please provide any details necessary for your treatment." data-ja="場所や理由について、必要な範囲でご記入ください。">Please provide any details necessary for your treatment.</p>
+      <textarea name="q14_detail"></textarea>
+    </div>
+    <p class="err" data-en="Please choose at least one." data-ja="1つ以上お選びください。">Please choose at least one.</p>
+  </div>
+</section>
+
+<!-- 4 -->
+<section>
+  <p class="sec-no">04</p>
+  <h2 data-en="Current Concerns" data-ja="現在のお悩み">Current Concerns</h2>
+
+  <div class="q" data-q>
+    <label class="qt" data-en="Do you currently have any concerns related to your head or body?<i class='req'>REQUIRED</i>" data-ja="現在、頭や体について気になることはありますか？<i class='req'>必須</i>">Do you currently have any concerns related to your head or body?<i class="req">REQUIRED</i></label>
+    <p class="hint" data-en="Select all that apply." data-ja="当てはまるものをすべてお選びください。">Select all that apply.</p>
+    <div class="opts" data-multi data-req data-none="No specific concerns" id="q15">
+      <label><input type="checkbox" name="q15_concerns" value="Neck or shoulder tension"><span data-en="Neck or shoulder tension" data-ja="首・肩の疲れやこり">Neck or shoulder tension</span></label>
+      <label><input type="checkbox" name="q15_concerns" value="Eye fatigue"><span data-en="Eye fatigue" data-ja="目の疲れ">Eye fatigue</span></label>
+      <label><input type="checkbox" name="q15_concerns" value="Heaviness in the head"><span data-en="Heaviness in the head" data-ja="頭が重く感じる">Heaviness in the head</span></label>
+      <label><input type="checkbox" name="q15_concerns" value="Difficulty sleeping or fully relaxing"><span data-en="Difficulty sleeping or fully relaxing" data-ja="睡眠や休息の質が気になる">Difficulty sleeping or fully relaxing</span></label>
+      <label><input type="checkbox" name="q15_concerns" value="Facial or body puffiness"><span data-en="Facial or body puffiness" data-ja="顔や体のむくみ">Facial or body puffiness</span></label>
+      <label><input type="checkbox" name="q15_concerns" value="Stress or tension"><span data-en="Stress or tension" data-ja="ストレスや緊張を感じる">Stress or tension</span></label>
+      <label><input type="checkbox" name="q15_concerns" value="Menstrual-cycle-related discomfort"><span data-en="Menstrual-cycle-related discomfort" data-ja="月経周期に伴う不快感">Menstrual-cycle-related discomfort</span></label>
+      <label><input type="checkbox" name="q15_concerns" value="Scalp dryness or itching"><span data-en="Scalp dryness or itching" data-ja="頭皮の乾燥・かゆみ">Scalp dryness or itching</span></label>
+      <label><input type="checkbox" name="q15_concerns" value="Dry or damaged hair"><span data-en="Dry or damaged hair" data-ja="髪の乾燥・ダメージ">Dry or damaged hair</span></label>
+      <label><input type="checkbox" name="q15_concerns" value="No specific concerns" data-none><span data-en="No specific concerns" data-ja="特にない">No specific concerns</span></label>
+      <label><input type="checkbox" name="q15_concerns" value="Other" data-other><span data-en="Other" data-ja="その他">Other</span></label>
+    </div>
+    <div class="sub" data-showif="q15_concerns:Other" hidden>
+      <textarea name="q15_other" data-en-ph="Please tell us more" data-ja-ph="内容をご記入ください"></textarea>
+    </div>
+    <p class="err" data-en="Please choose at least one." data-ja="1つ以上お選びください。">Please choose at least one.</p>
+  </div>
+
+  <div class="q" id="q16wrap" data-q hidden>
+    <label class="qt" data-en="Which concern is most important to you today?<i class='req'>REQUIRED</i>" data-ja="現在、最も気になることを1つお選びください<i class='req'>必須</i>">Which concern is most important to you today?<i class="req">REQUIRED</i></label>
+    <div class="opts" data-single id="q16opts"></div>
+    <p class="notice" data-en="Your therapist will use your answers to select a herbal oil blend suited to your needs on the day."
+       data-ja="ご回答を参考に、当日の状態に合わせた漢方オイルをスパニストが選定します。">Your therapist will use your answers to select a herbal oil blend suited to your needs on the day.</p>
+    <p class="err" data-en="Please choose one." data-ja="お選びください。">Please choose one.</p>
+  </div>
+</section>
+
+<!-- 5 -->
+<section>
+  <p class="sec-no">05</p>
+  <h2 data-en="Treatment Clothing" data-ja="施術着">Treatment Clothing</h2>
+  <div class="q" data-q>
+    <label class="qt" data-en="Please select your treatment T-shirt size<i class='req'>REQUIRED</i>" data-ja="施術用Tシャツのサイズをお選びください<i class='req'>必須</i>">Please select your treatment T-shirt size<i class="req">REQUIRED</i></label>
+    <p class="hint" data-en="These are Japanese sizes. Please select one size larger if you prefer a relaxed fit."
+       data-ja="日本規格のサイズです。ゆったり着たい場合は、普段より1サイズ上をお選びください。">These are Japanese sizes. Please select one size larger if you prefer a relaxed fit.</p>
+    <div class="opts" data-single data-req>
+      <label><input type="radio" name="q17_size" value="S"><span>S</span></label>
+      <label><input type="radio" name="q17_size" value="M"><span>M</span></label>
+      <label><input type="radio" name="q17_size" value="L"><span>L</span></label>
+      <label><input type="radio" name="q17_size" value="XL"><span>XL</span></label>
+      <label><input type="radio" name="q17_size" value="2XL"><span>2XL</span></label>
+      <label><input type="radio" name="q17_size" value="Check on arrival"><span data-en="I would like to check the size on arrival" data-ja="来店時に確認したい">I would like to check the size on arrival</span></label>
+    </div>
+    <p class="err" data-en="Please choose one." data-ja="お選びください。">Please choose one.</p>
+  </div>
+</section>
+
+<!-- 6 -->
+<section>
+  <p class="sec-no">06</p>
+  <h2 data-en="Optional Guest Survey" data-ja="任意アンケート">Optional Guest Survey</h2>
+  <p class="hint" data-en="The following questions are optional and will help us improve our services."
+     data-ja="今後のサービス改善のため、よろしければご回答ください。">The following questions are optional and will help us improve our services.</p>
+
+  <div class="q">
+    <label class="qt" data-en="Age range<i class='opt'>OPTIONAL</i>" data-ja="年代<i class='opt'>任意</i>">Age range<i class="opt">OPTIONAL</i></label>
+    <select name="q18_age">
+      <option value="" data-en="Select" data-ja="選択してください">Select</option>
+      <option value="Under 18" data-en="Under 18" data-ja="18歳未満">Under 18</option>
+      <option value="18-24">18–24</option><option value="25-34">25–34</option>
+      <option value="35-44">35–44</option><option value="45-54">45–54</option>
+      <option value="55-64">55–64</option><option value="65+">65+</option>
+      <option value="Prefer not to say" data-en="Prefer not to say" data-ja="回答しない">Prefer not to say</option>
+    </select>
+  </div>
+
+  <div class="q">
+    <label class="qt" data-en="Country or region of residence<i class='opt'>OPTIONAL</i>" data-ja="現在お住まいの国・地域<i class='opt'>任意</i>">Country or region of residence<i class="opt">OPTIONAL</i></label>
+    <input type="text" name="q19_country">
+  </div>
+
+  <div class="q">
+    <label class="qt" data-en="Are you currently visiting or living in Japan?<i class='opt'>OPTIONAL</i>" data-ja="現在の日本での滞在状況<i class='opt'>任意</i>">Are you currently visiting or living in Japan?<i class="opt">OPTIONAL</i></label>
+    <div class="opts" data-single>
+      <label><input type="radio" name="q20_stay" value="Visiting Japan from overseas"><span data-en="Visiting Japan from overseas" data-ja="海外から日本を旅行中">Visiting Japan from overseas</span></label>
+      <label><input type="radio" name="q20_stay" value="Living in Japan"><span data-en="Living in Japan" data-ja="日本在住">Living in Japan</span></label>
+      <label><input type="radio" name="q20_stay" value="Temporarily staying in Japan"><span data-en="Temporarily staying in Japan" data-ja="一時的に日本へ滞在中">Temporarily staying in Japan</span></label>
+      <label><input type="radio" name="q20_stay" value="Other"><span data-en="Other" data-ja="その他">Other</span></label>
+      <label><input type="radio" name="q20_stay" value="Prefer not to say"><span data-en="Prefer not to say" data-ja="回答しない">Prefer not to say</span></label>
+    </div>
+  </div>
+
+  <div class="q">
+    <label class="qt" data-en="How did you first hear about IKINUKI?<i class='opt'>OPTIONAL</i>" data-ja="IKINUKIを最初に知ったきっかけを教えてください<i class='opt'>任意</i>">How did you first hear about IKINUKI?<i class="opt">OPTIONAL</i></label>
+    <select name="q21_source">
+      <option value="" data-en="Select" data-ja="選択してください">Select</option>
+      <option value="Google Search" data-en="Google Search" data-ja="Google検索">Google Search</option>
+      <option value="Google Maps" data-en="Google Maps" data-ja="Googleマップ">Google Maps</option>
+      <option value="Instagram">Instagram</option><option value="TikTok">TikTok</option>
+      <option value="YouTube">YouTube</option><option value="GetYourGuide">GetYourGuide</option>
+      <option value="Viator">Viator</option>
+      <option value="Other booking platform" data-en="Other booking platform" data-ja="その他の予約サイト">Other booking platform</option>
+      <option value="Hotel or concierge" data-en="Hotel or concierge" data-ja="ホテル・コンシェルジュ">Hotel or concierge</option>
+      <option value="Friend or family" data-en="Friend or family" data-ja="友人・家族からの紹介">Friend or family</option>
+      <option value="Walked past the salon" data-en="Walked past the salon" data-ja="店舗の前を通った">Walked past the salon</option>
+      <option value="Other" data-en="Other" data-ja="その他">Other</option>
+      <option value="I do not remember" data-en="I do not remember" data-ja="覚えていない">I do not remember</option>
+    </select>
+  </div>
+
+  <div class="q" data-showtravel hidden>
+    <label class="qt" data-en="Who are you traveling with in Japan?<i class='opt'>OPTIONAL</i>" data-ja="今回、どなたと日本を訪れていますか？<i class='opt'>任意</i>">Who are you traveling with in Japan?<i class="opt">OPTIONAL</i></label>
+    <div class="opts" data-single>
+      <label><input type="radio" name="q22_with" value="Solo"><span data-en="Solo" data-ja="1人">Solo</span></label>
+      <label><input type="radio" name="q22_with" value="Partner"><span data-en="Partner" data-ja="パートナー">Partner</span></label>
+      <label><input type="radio" name="q22_with" value="Friends"><span data-en="Friends" data-ja="友人">Friends</span></label>
+      <label><input type="radio" name="q22_with" value="Family"><span data-en="Family" data-ja="家族">Family</span></label>
+      <label><input type="radio" name="q22_with" value="Group"><span data-en="Group" data-ja="グループ・団体">Group</span></label>
+      <label><input type="radio" name="q22_with" value="Other"><span data-en="Other" data-ja="その他">Other</span></label>
+      <label><input type="radio" name="q22_with" value="Prefer not to say"><span data-en="Prefer not to say" data-ja="回答しない">Prefer not to say</span></label>
+    </div>
+  </div>
+
+  <div class="q" data-showtravel hidden>
+    <label class="qt" data-en="Where else will you visit during this trip?<i class='opt'>OPTIONAL</i>" data-ja="今回の日本旅行で、東京以外に訪れる場所を教えてください<i class='opt'>任意</i>">Where else will you visit during this trip?<i class="opt">OPTIONAL</i></label>
+    <div class="opts" data-multi data-none="Tokyo only">
+      <label><input type="checkbox" name="q23_places" value="Tokyo only" data-none><span data-en="Tokyo only" data-ja="東京のみ">Tokyo only</span></label>
+      <label><input type="checkbox" name="q23_places" value="Kyoto"><span data-en="Kyoto" data-ja="京都">Kyoto</span></label>
+      <label><input type="checkbox" name="q23_places" value="Osaka"><span data-en="Osaka" data-ja="大阪">Osaka</span></label>
+      <label><input type="checkbox" name="q23_places" value="Nara"><span data-en="Nara" data-ja="奈良">Nara</span></label>
+      <label><input type="checkbox" name="q23_places" value="Hakone"><span data-en="Hakone" data-ja="箱根">Hakone</span></label>
+      <label><input type="checkbox" name="q23_places" value="Mt. Fuji or Kawaguchiko"><span data-en="Mt. Fuji or Kawaguchiko" data-ja="富士山・河口湖周辺">Mt. Fuji or Kawaguchiko</span></label>
+      <label><input type="checkbox" name="q23_places" value="Hiroshima"><span data-en="Hiroshima" data-ja="広島">Hiroshima</span></label>
+      <label><input type="checkbox" name="q23_places" value="Hokkaido"><span data-en="Hokkaido" data-ja="北海道">Hokkaido</span></label>
+      <label><input type="checkbox" name="q23_places" value="Okinawa"><span data-en="Okinawa" data-ja="沖縄">Okinawa</span></label>
+      <label><input type="checkbox" name="q23_places" value="Other"><span data-en="Other" data-ja="その他">Other</span></label>
+      <label><input type="checkbox" name="q23_places" value="Not decided yet"><span data-en="Not decided yet" data-ja="まだ決めていない">Not decided yet</span></label>
+    </div>
+  </div>
+</section>
+
+<!-- 7 -->
+<section>
+  <p class="sec-no">07</p>
+  <h2 data-en="Confirmation and Consent" data-ja="確認・同意">Confirmation and Consent</h2>
+
+  <div class="q consent" data-q>
+    <div class="opts" data-req data-consent>
+      <label><input type="checkbox" name="q24_consent_treatment" value="yes"><span data-en="I confirm that the information provided above is accurate to the best of my knowledge. I understand that the treatment may be adjusted, paused or declined depending on my physical condition, hair or scalp condition."
+        data-ja="上記の回答が現時点で正確であることを確認します。体調、髪、頭皮の状態によって、施術内容の変更、中断または施術をお断りする場合があることを理解しました。">I confirm that the information provided above is accurate to the best of my knowledge. I understand that the treatment may be adjusted, paused or declined depending on my physical condition, hair or scalp condition.</span></label>
+    </div>
+    <p class="err" data-en="Please confirm to continue." data-ja="チェックをお願いします。">Please confirm to continue.</p>
+  </div>
+
+  <div class="q consent" data-q>
+    <div class="opts" data-req data-consent>
+      <label><input type="checkbox" name="q25_consent_data" value="yes"><span data-en="I consent to IKINUKI collecting and using the information provided for treatment safety, product selection and necessary communication."
+        data-ja="安全な施術の提供、使用商材の選定および必要な連絡を目的として、入力した情報をIKINUKIが取得・利用することに同意します。">I consent to IKINUKI collecting and using the information provided for treatment safety, product selection and necessary communication.</span></label>
+    </div>
+    <p class="err" data-en="Please confirm to continue." data-ja="チェックをお願いします。">Please confirm to continue.</p>
+  </div>
+
+  <div class="q consent" data-q>
+    <div class="opts" data-req data-consent>
+      <label><input type="checkbox" name="q26_consent_privacy" value="yes"><span data-en="I have read the <a href='../privacy.html' target='_blank' rel='noopener'>privacy policy</a>."
+        data-ja="<a href='../privacy.html' target='_blank' rel='noopener'>プライバシーポリシー</a>を確認しました。">I have read the <a href="../privacy.html" target="_blank" rel="noopener">privacy policy</a>.</span></label>
+    </div>
+    <p class="err" data-en="Please confirm to continue." data-ja="チェックをお願いします。">Please confirm to continue.</p>
+  </div>
+</section>
+
+<div class="actions">
+  <button type="submit" class="send" id="send" data-en="SUBMIT" data-ja="送信する">SUBMIT</button>
+  <p class="sending" id="msg"></p>
+</div>
+
+</form>
+
+<div id="done">
+  <h2 data-en="Thank you for completing the form." data-ja="ご回答ありがとうございます。">Thank you for completing the form.</h2>
+  <p data-en="Please contact us before your appointment if there are any changes to your physical condition, hair or scalp condition."
+     data-ja="ご予約日までに、体調、髪、頭皮の状態が変わった場合は、事前に店舗へご連絡ください。">Please contact us before your appointment if there are any changes to your physical condition, hair or scalp condition.</p>
+  <p data-en="If we need additional information about extensions, braids, locs, hair transplants or hair enhancements, our team will contact you."
+     data-ja="エクステ、ブレイズ、ドレッド、植毛・増毛等について確認が必要な場合は、店舗からご連絡します。">If we need additional information about extensions, braids, locs, hair transplants or hair enhancements, our team will contact you.</p>
+  <p data-en="We look forward to welcoming you to IKINUKI." data-ja="当日のご来店をお待ちしております。">We look forward to welcoming you to IKINUKI.</p>
+</div>
+
+</div>
+
+<script>
+/* 送信先（GASウェブアプリ）。デプロイ後にURLを差し替える */
+const ENDPOINT = "REPLACE_WITH_GAS_WEBAPP_URL";
+
+let lang = 'en';
+function setLang(l){
+  lang = l;
+  document.querySelectorAll('[data-en]').forEach(el=>{
+    const t = el.dataset[l]; if(t) el.innerHTML = t;
+  });
+  document.querySelectorAll('[data-en-ph]').forEach(el=>{
+    const t = el.dataset[l+'Ph']; if(t) el.placeholder = t;
+  });
+  document.body.classList.toggle('ja', l==='ja');
+  document.documentElement.lang = l;
+  btnEn.classList.toggle('on', l==='en');
+  btnJa.classList.toggle('on', l==='ja');
+  try{ localStorage.setItem('ikinuki-lang', l); }catch(e){}
+  buildQ16();
+}
+const btnEn=document.getElementById('btn-en'), btnJa=document.getElementById('btn-ja');
+const f=document.getElementById('f');
+
+/* 選択の見た目 */
+f.addEventListener('change', e=>{
+  const box = e.target.closest('.opts');
+  if(box){
+    if(e.target.type==='radio'){
+      box.querySelectorAll('label').forEach(l=>l.classList.remove('sel'));
+      e.target.closest('label').classList.add('sel');
+    }else if(e.target.type==='checkbox'){
+      /* 「特になし」系は他と同時に選べない */
+      const noneVal = box.dataset.none;
+      if(noneVal){
+        if(e.target.dataset.none !== undefined && e.target.checked){
+          box.querySelectorAll('input[type=checkbox]').forEach(c=>{ if(c!==e.target) c.checked=false; });
+        }else if(e.target.checked){
+          const n = box.querySelector('input[data-none]'); if(n) n.checked=false;
+        }
+      }
+      box.querySelectorAll('label').forEach(l=>l.classList.toggle('sel', l.querySelector('input').checked));
+    }
+    box.closest('[data-q]')?.classList.remove('bad');
+  }
+  refreshConditionals();
+});
+
+function vals(name){ return [...f.querySelectorAll(`[name="${name}"]`)].filter(i=>i.checked||((i.type!=='radio'&&i.type!=='checkbox')&&i.value)).map(i=>i.value); }
+
+function refreshConditionals(){
+  /* 「その他」等を選んだら自由記入を出す */
+  document.querySelectorAll('[data-showif]').forEach(el=>{
+    const [name,val] = el.dataset.showif.split(':');
+    el.hidden = !vals(name).includes(val);
+  });
+  /* 「いいえ/特になし」以外を選んだら詳細欄を出す */
+  document.querySelectorAll('[data-shownotnone]').forEach(el=>{
+    const name = el.dataset.shownotnone;
+    const v = vals(name);
+    const none = f.querySelector(`[name="${name}"][data-none]`)?.value;
+    el.hidden = !(v.length && !(v.length===1 && v[0]===none));
+  });
+  /* Q9: 「いいえ」以外を選んだら注意書きと写真添付を出す */
+  document.querySelectorAll('[data-shownotif]').forEach(el=>{
+    const [name,val] = el.dataset.shownotif.split(':');
+    const v = vals(name);
+    el.hidden = !(v.length && v[0]!==val);
+  });
+  /* 旅行者だけに出す設問 */
+  const stay = vals('q20_stay')[0];
+  const travel = stay==='Visiting Japan from overseas' || stay==='Temporarily staying in Japan';
+  document.querySelectorAll('[data-showtravel]').forEach(el=> el.hidden = !travel);
+  buildQ16();
+}
+
+/* Q16 は Q15 で選んだものだけを出す */
+function buildQ16(){
+  const picked = vals('q15_concerns').filter(v=>v!=='No specific concerns');
+  const wrap=document.getElementById('q16wrap'), box=document.getElementById('q16opts');
+  if(!picked.length){ wrap.hidden=true; box.innerHTML=''; return; }
+  const prev = vals('q16_main')[0];
+  box.innerHTML='';
+  picked.forEach(v=>{
+    const src=[...document.querySelectorAll('#q15 input')].find(i=>i.value===v);
+    const label=src ? src.closest('label').querySelector('span').innerHTML : v;
+    const l=document.createElement('label');
+    l.innerHTML = `<input type="radio" name="q16_main" value="${v.replace(/"/g,'&quot;')}"><span>${label}</span>`;
+    if(v===prev){ l.querySelector('input').checked=true; l.classList.add('sel'); }
+    box.appendChild(l);
+  });
+  wrap.hidden=false;
+}
+
+/* 進み具合 */
+const prog=document.getElementById('prog');
+addEventListener('scroll',()=>{
+  const h=document.body.scrollHeight-innerHeight;
+  prog.style.width = (h>0 ? Math.min(100, scrollY/h*100) : 0)+'%';
+});
+
+/* 写真（添付は任意・3MBまで縮小して送る） */
+let photoData=null, photoName='';
+document.getElementById('photo').addEventListener('change', e=>{
+  const file=e.target.files[0]; const note=document.getElementById('photoNote');
+  photoData=null; photoName='';
+  if(!file) return;
+  photoName=file.name;
+  const img=new Image(), fr=new FileReader();
+  fr.onload=()=>{ img.onload=()=>{
+    const max=1400, s=Math.min(1, max/Math.max(img.width,img.height));
+    const c=document.createElement('canvas'); c.width=img.width*s|0; c.height=img.height*s|0;
+    c.getContext('2d').drawImage(img,0,0,c.width,c.height);
+    photoData=c.toDataURL('image/jpeg',.82);
+    const t=document.getElementById('thumb'); t.src=photoData; t.hidden=false;
+    note.textContent = lang==='ja' ? '写真を添付しました。' : 'Photo attached.';
+  }; img.src=fr.result; };
+  fr.readAsDataURL(file);
+});
+
+/* 送信 */
+f.addEventListener('submit', async e=>{
+  e.preventDefault();
+  let firstBad=null;
+  document.querySelectorAll('[data-q]').forEach(q=>{
+    if(q.hidden){ q.classList.remove('bad'); return; }
+    let ok=true;
+    q.querySelectorAll('input[data-req]').forEach(i=>{ if(!i.value.trim()) ok=false; });
+    const box=q.querySelector('.opts[data-req]');
+    if(box){
+      const any=[...box.querySelectorAll('input')].some(i=>i.checked);
+      if(!any) ok=false;
+    }
+    q.classList.toggle('bad', !ok);
+    if(!ok && !firstBad) firstBad=q;
+  });
+  /* Q16 は出ているときだけ必須 */
+  const q16=document.getElementById('q16wrap');
+  if(!q16.hidden && !vals('q16_main').length){ q16.classList.add('bad'); firstBad=firstBad||q16; }
+  if(firstBad){ firstBad.scrollIntoView({behavior:'smooth',block:'center'}); return; }
+
+  const btn=document.getElementById('send'), msg=document.getElementById('msg');
+  btn.disabled=true; msg.textContent = lang==='ja' ? '送信しています…' : 'Sending…';
+
+  const data={ submitted_at:new Date().toISOString(), form_lang:lang };
+  new FormData(f).forEach((v,k)=>{ data[k] = data[k] ? data[k]+' / '+v : v; });
+  if(photoData){ data.photo_base64=photoData; data.photo_name=photoName; }
+
+  try{
+    await fetch(ENDPOINT,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(data)});
+    f.hidden=true; document.getElementById('done').style.display='block';
+    scrollTo({top:0,behavior:'smooth'});
+  }catch(err){
+    btn.disabled=false;
+    msg.textContent = lang==='ja' ? '送信できませんでした。通信環境をご確認のうえ、もう一度お試しください。' : 'We could not send your form. Please check your connection and try again.';
+  }
+});
+
+let saved=null; try{ saved=localStorage.getItem('ikinuki-lang'); }catch(e){}
+setLang(saved || ((navigator.language||'').startsWith('ja') ? 'ja' : 'en'));
+refreshConditionals();
+</script>
+</body>
+</html>
