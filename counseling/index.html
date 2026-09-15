@@ -142,6 +142,8 @@ button.send:disabled{opacity:.45;cursor:default}
       <label><input type="radio" name="q5_language" value="Japanese"><span data-en="Japanese" data-ja="日本語">Japanese</span></label>
       <label><input type="radio" name="q5_language" value="English"><span data-en="English" data-ja="English">English</span></label>
     </div>
+    <p class="hint" data-en="※For English guidance, our therapists may use simple English, prepared English materials and translation tools."
+       data-ja="※英語でのご案内は、簡単な英語、英語の案内資料および翻訳ツールを使用して対応します。">※For English guidance, our therapists may use simple English, prepared English materials and translation tools.</p>
     <p class="err" data-en="Please choose one." data-ja="お選びください。">Please choose one.</p>
   </div>
 </section>
@@ -508,8 +510,8 @@ button.send:disabled{opacity:.45;cursor:default}
 </div>
 
 <script>
-/* 送信先（GASウェブアプリ）。デプロイ後にURLを差し替える */
-const ENDPOINT = "REPLACE_WITH_GAS_WEBAPP_URL";
+/* 送信先（ikinuki-ig-webhook の /counseling。保存・写真・店側へのLINE通知まで行う） */
+const ENDPOINT = "https://asia-northeast1-ochi-secretary.cloudfunctions.net/ikinuki-ig-webhook/counseling";
 
 let lang = 'en';
 function setLang(l){
@@ -655,7 +657,9 @@ f.addEventListener('submit', async e=>{
   if(photoData){ data.photo_base64=photoData; data.photo_name=photoName; }
 
   try{
-    await fetch(ENDPOINT,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(data)});
+    const res = await fetch(ENDPOINT,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(data)});
+    const out = await res.json().catch(()=>({}));
+    if(!res.ok || !out.ok) throw new Error(out.error || res.status);
     f.hidden=true; document.getElementById('done').style.display='block';
     scrollTo({top:0,behavior:'smooth'});
   }catch(err){
